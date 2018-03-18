@@ -1,0 +1,28 @@
+{
+  "name": "weekly-expenses-report",
+  "version": "1.0.0",
+  "description": "sends weekly sms expense reports to user",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jsdev17/weekly-expenses-report.git"
+  },
+  "keywords": [],
+  "author": "Juan Carlos Gonzalez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jsdev17/weekly-expenses-report/issues"
+  },
+  "homepage": "https://github.com/jsdev17/weekly-expenses-report#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chalk": "^2.3.2",
+    "express": "^4.16.3",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.17.2",
+    "twilio": "^3.13.1"
+  }
+}

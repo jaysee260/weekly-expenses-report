@@ -1,0 +1,9 @@
+{
+  "twilio": {
+    "accountSid": "",
+    "authToken": "",
+    "twilioNumber": "",
+    "myNumber": ""
+  },
+  "plaid": {}
+}
