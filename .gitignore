@@ -1,4 +1,4 @@
 node_modules
 config
-api/plaid/quickstart
+api/plaid/quickstart/node
 api/twilio/inputs.js
