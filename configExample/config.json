@@ -5,5 +5,13 @@
     "twilioNumber": "",
     "myNumber": ""
   },
-  "plaid": {}
+  "plaid": {
+    "client_id": "",
+    "secret": "",
+    "public_key": "",
+    "env": "sandbox",
+    "access_token": null,
+    "public_token": null,
+    "item_id": null
+  }
 }
