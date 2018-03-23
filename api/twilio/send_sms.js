@@ -7,14 +7,14 @@ const {
 } = require('../../config').init().twilio;
 const client = new twilio(accountSid, authToken);
 
-
 function send_sms(msg) {
   client.messages.create({
     to: myNumber,  // Text this number
     from: twilioNumber, // From a valid Twilio number
     body: msg
   })
-  .then((message) => console.log(message.sid));
+  .then((message) => 
+    console.log(message.sid));
 }
 
 // send a text after X milliseconds
