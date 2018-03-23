@@ -10,6 +10,10 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  hasAccessToken: {
+    type: Boolean,
+    default: false
+  },
   accessToken: {
     type: String,
     default: null

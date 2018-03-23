@@ -1,28 +1,31 @@
+'use strict';
+
+////////////////////////////////////////////////////////
+////////   Handle connection to Database //////////////
+///////////////////////////////////////////////////////
+
 const mongoose = require('mongoose');
-const User = require('./schemas/User');
-const { db } = require('../config').init();
-const dbUri = db.uri
-              .replace('<dbname>', db.name)
-              .replace('<dbuser>', db.user)
-              .replace('<dbpassword>', db.password);
-const { r, g } = require('../console');
+const { r, y } = require('../console');
 
-mongoose.Promise = global.Promise;
-mongoose.connect(dbUri);
 
-const mLab = mongoose.connection;
-mLab.on('error', function() {
-  console.error(r('db connection error...'))
-});
-mLab.once('open', function() {
-  console.log(g('Connected to mLab'));
-  User.create({
-    firstName: 'Juan Carlos',
-    lastName: 'Gonzalez',
-    accessToken: 'blablabla'
-  }).then((res) => {
-    console.log(res);
-  }).catch(err => {
-    if (err) throw err;
-  })
-});
+module.exports = (dbKeys) => {
+  // Enable mongoose promises
+  mongoose.Promise = global.Promise;
+  // Construct DB URI
+  const dbUri = dbKeys.uri
+              .replace('<dbname>', dbKeys.name)
+              .replace('<dbuser>', dbKeys.user)
+              .replace('<dbpassword>', dbKeys.password);
+
+  // Establish connection to DB
+  mongoose.connect(dbUri);
+  // Create connection reference
+  const mLab = mongoose.connection;
+  // Create DB event listeners
+  mLab.on('error', function() {
+    console.error(r('db connection error...'))
+  });
+  mLab.once('open', function() {
+    console.log(y('Connected to mLab'));
+  });
+}
