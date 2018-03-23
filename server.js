@@ -9,7 +9,6 @@
 //////////////////////////////////////
 
 const express = require('express');
-// const MessagingResponse = require('twilio').twiml.MessagingResponse;
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const keys = require('./config');
@@ -25,27 +24,33 @@ const port = keys.port;
 ///////////////////////////////
 
 app.use(logger('dev'));
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use('/plaid', express.static('public'));
 
 ////////////////////////////////////////////////
-///// Route registration and configuration /////
+///// Routes registration and configuration ////
 ////////////////////////////////////////////////
 
 const root = express.Router();
 const sms = express.Router();
+const plaid = express.Router();
 
 require('./routes/root')(root);
 require('./routes/sms')(sms);
+require('./routes/plaid')(plaid);
 
 /////////////////////////
 ///// API Catalogue /////
 /////////////////////////
 
 // Root route
-app.use('/', root);
+app.get('/', root); // other routes are inaccessible if we use app.use here...
 // SMS route
-app.use('/sms', sms);
+app.use('/api/sms', sms);
+// Plaid route
+app.use('/api/plaid', plaid);
 
 //////////////////////////
 ///// Spin up server /////
