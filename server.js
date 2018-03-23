@@ -10,6 +10,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 const logger = require('morgan');
 const keys = require('./config');
 
@@ -34,17 +35,25 @@ app.use(logger('dev'));
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(passport.initialize());
+app.use('/register', express.static('public'));
+app.use('/login', express.static('public'));
 app.use('/plaid', express.static('public'));
+
 
 ////////////////////////////////////////////////
 ///// Routes registration and configuration ////
 ////////////////////////////////////////////////
 
 const root = express.Router();
+const register = express.Router();
+const auth = express.Router();
 const sms = express.Router();
 const plaid = express.Router();
 
 require('./routes/root')(root);
+require('./routes/register')(register);
+require('./routes/auth')(auth);
 require('./routes/sms')(sms);
 require('./routes/plaid')(plaid);
 
@@ -54,9 +63,13 @@ require('./routes/plaid')(plaid);
 
 // Root route
 app.get('/', root); // other routes are inaccessible if we use app.use here...
+// User registration route
+app.use('/register', register);
+// Authentication route
+app.use('/login', auth);
 // SMS route
 app.use('/api/sms', sms);
-// Plaid route
+// Plaid API route
 app.use('/api/plaid', plaid);
 
 //////////////////////////
