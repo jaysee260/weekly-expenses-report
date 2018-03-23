@@ -13,5 +13,11 @@
     "access_token": null,
     "public_token": null,
     "item_id": null
+  },
+  "db": {
+    "user": "",
+    "password": "",
+    "name": "",
+    "uri": ""
   }
 }
