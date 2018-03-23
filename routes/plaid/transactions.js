@@ -1,3 +1,4 @@
+'use strict';
 
 // invokes plaid method that retrieves transactions
 
