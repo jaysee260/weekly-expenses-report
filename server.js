@@ -18,6 +18,13 @@ const { y, m, g, r, b } = require('./console');
 
 const app = express();
 const port = keys.port;
+const dbKeys = keys.init().db;
+
+////////////////////////////
+///// DB Configuration /////
+////////////////////////////
+
+require('./db/mongoose')(dbKeys);
 
 ///////////////////////////////
 ///// Register Middleware /////
