@@ -1,3 +1,6 @@
+
+// invokes plaid method that retrives accounts
+
 const accounts = (router) => {
   router.get('/', (req, res, next) => {
     console.log('you\'ve reached accounts route');

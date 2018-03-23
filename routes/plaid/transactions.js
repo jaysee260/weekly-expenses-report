@@ -1,3 +1,6 @@
+
+// invokes plaid method that retrieves transactions
+
 const transactions = (router) => {
   router.post('/', (req, res, next) => {
     console.log('you\'ve reached transactions route');
