@@ -23,4 +23,4 @@ const client = new plaid.Client(
   plaid.environments[env]
 );
 
-console.log(client);
+module.exports = client;
