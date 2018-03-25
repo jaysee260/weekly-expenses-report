@@ -7,18 +7,22 @@ const {
 } = require('../../config').init().twilio;
 const client = new twilio(accountSid, authToken);
 
+// Ideally this would also receive the user's phone number
 function send_sms(msg) {
   client.messages.create({
     to: myNumber,  // Text this number
     from: twilioNumber, // From a valid Twilio number
     body: msg
   })
-  .then((message) => 
-    console.log(message.sid));
+  .then(message => {
+    let msg = 'SMS sent';
+    console.log(msg + '\n' + message.sid);
+  }).catch(err => {
+    let msg = 'Error sending SMS';
+    console.log(msg + '\n' + err);
+  })
+
 }
 
-// send a text after X milliseconds
-module.exports = (msg, ms) => {
-  setTimeout(() => send_sms(msg), ms);
-}
+module.exports = send_sms;
 

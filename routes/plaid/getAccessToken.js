@@ -24,7 +24,7 @@ const getAccessToken = (router) => {
         next();
       }
 
-      // Retrieve user id from db...
+      // Retrieve user id from... ideally session object...
       // Store user specific access_token and item_id
       // in persistent data store
       const userId = '';
