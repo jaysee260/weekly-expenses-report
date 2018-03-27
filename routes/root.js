@@ -9,8 +9,9 @@ const bodyParser = require('body-parser');
 const root = (router) => {
   router.use(bodyParser.json());
   router.use((req, res, next) => {
-    res.send('up and running!');
-    next();
+    res.render('index', { 
+      msg: 'Welcome to my humble app :)'
+    });
   });
 }
 
