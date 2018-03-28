@@ -40,6 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/plaid', express.static('public'));
+app.use('/login', express.static('public'));
 
 ////////////////////////////////////////////////
 ///// Routes registration and configuration ////
