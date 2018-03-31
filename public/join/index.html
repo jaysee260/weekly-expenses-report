@@ -44,28 +44,131 @@
       height: 100vh;
       width: 100%;
     }
+
+    /* ======================= */
+    #intro #brand-content {
+      font-family: Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue","Segoe UI","Oxygen","Ubuntu","Cantarell","Open Sans",sans-serif;
+      /* margin-right: 30px;
+      margin-left: 30px; */
+    }
+
+    #intro #slogan {
+      color: #fff;
+      font-weight: 300;
+      font-size: 65px;
+    }
+
+    #intro #pitch {
+      font-size: 25px;
+      color: rgb(151, 150, 150);
+      letter-spacing: 1px;
+    }
+
+    #pitch sup, .asterisk {
+      color: #fff;
+      font-size: 15px;
+    }
+
+    #pitch span, #pitch a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    #pitch a {
+      border-bottom: 1px solid grey;
+      padding-bottom: .75px;
+    }
+
+    #pitch a:hover {
+      border-bottom: 1px solid #fff;
+    }
+
+    /* SIGN UP FORM */
+
+    /* Vertically center content of #intro */
+    #intro .container {
+      /* display: flex;
+      align-items: center; */
+    }
+
+    form label {
+      color: grey;
+    }
+
+    form p {
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    form {
+      /* margin: 0 auto; */
+      /* width: 340px; */
+    }
   </style>
 </head>
 <body>
 
-  <main>
-    <section id="intro">
-      <div class="container">
-        <form action="">
-          <div class="form-header"></div>
-          <div class="card form-body">
-            
+  <section id="intro">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-7">
+          <div id="brand-content">
+            <h1 id="slogan">
+                Keep track of how much you spend
+              </h1>
+              <p id="pitch">
+                MyApp is a service that sends you <span> one weekly text message </span> telling you exactly how much, in dollar amounts, you spent during the last 7 days. It does so by securely retrieving transaction data from <span>your bank</span><sup>*</sup> account through the use of <a href="https://plaid.com/" target="_blank">Plaid</a>. This means that MyApp <span>never sees</span> your bank login credentials, and thus is <span>unable to keep them</span>.
+              </p>
+              <p class="asterisk">
+                <sup>*</sup>Access supported to a wide range of financial institutions.
+              </p> 
           </div>
-        </form>
+        </div>
+
+        <div class="col-md-5">
+          <form action="">
+            <div class="form-header"></div>
+            <div class="card form-body">
+              <div class="card-body">
+                <div class="form-group">
+                  <!-- Live check of phone # -->
+                  <label for="phone">
+                    Phone number
+                  </label>
+                  <input type="text" id="phone" name="phone" tabindex="1" class="form-control" placeholder="Your mobile number" />
+                  <p class="form-control-note text-muted">You will be  able to login with either your number or your email.</p>
+                </div>
+                <div class="form-group">
+                  <!-- Live check of email -->
+                  <label for="email">
+                    Email
+                  </label>
+                  <input type="text" id="email" name="email" tabindex="1" class="form-control" placeholder="address@domain.com" />
+                  <p class="form-control-note text-muted">Email will be used to send you monthly reports if you choose to sign up for them.</p>
+                </div>
+                <div class="form-group">
+                  <label for="password">
+                    Password
+                  </label>
+                  <input type="text" id="password" name="password" tabindex="2" class="form-control" placeholder="Choose a password" />
+                  <p class="form-control-note text-muted">Use at least one letter, one numeral, and seven characters.</p>
+                </div>
+                <input type="submit" name="signup" value="Sign Up for MyApp" tabindex="3" class="btn btn-primary btn-block" data-disable-with="Signing up...">
+              </div>
+            </div>
+          </form>
+        </div>
+
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- <section id="about">
-    </section>
+  <!-- <section id="about">
+  </section>
 
-    <section id="another">
-    </section> -->
-  </main>
+  <section id="another">
+  </section> -->
   
 
 
