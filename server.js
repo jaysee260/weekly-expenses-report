@@ -40,6 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/plaid', express.static('public'));
+app.use('/join', express.static('public'));
 app.use('/login', express.static('public'));
 
 ////////////////////////////////////////////////
@@ -47,10 +48,12 @@ app.use('/login', express.static('public'));
 ////////////////////////////////////////////////
 
 const root = express.Router();
+const user = express.Router();
 const sms = express.Router();
 const plaid = express.Router();
 
 require('./routes/root')(root);
+require('./routes/user')(user);
 require('./routes/sms')(sms);
 require('./routes/plaid')(plaid);
 
@@ -60,6 +63,8 @@ require('./routes/plaid')(plaid);
 
 // Root route
 app.get('/', root); // other routes are inaccessible if we use app.use here...
+// User route
+app.use('/user', user);
 // SMS route
 app.use('/api/sms', sms);
 // Plaid route
