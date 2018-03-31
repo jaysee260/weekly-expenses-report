@@ -30,6 +30,7 @@ const accounts = (router) => {
           msg = 'Pulled ' + authResponse.accounts.length + ' accounts';
           console.log(msg + '\n' + authResponse.accounts);
           let checking = authResponse.accounts.filter(acct => acct.subtype === 'checking');
+          // renderSmsBody() could be a function.
           let sms = `Account: ${checking[0].name}\nBalance: $${checking[0].balances.current}`;
           // Send sms with mock summary containing one account name and its balance
           // Ideally, this would return a Promise so that we could safely

@@ -7,8 +7,7 @@ const User = require('../../db/schemas/User');
 
 const getAccessToken = (router) => {
   router.post('/', (req, res, next) => {
-    console.log('you\'ve reached get_access_token route');
-    // Capture public_token sent by Plaid Link Module
+    // Capture public_token sent by Plaid Link
     let public_token = req.body.public_token;
     console.log(`Public Token: ${public_token}`);
 
@@ -25,12 +24,11 @@ const getAccessToken = (router) => {
       }
 
       // Retrieve user id from... ideally session object...
-      // Store user specific access_token and item_id
-      // in persistent data store
       const userId = '';
       console.log(`Access Token: ${tokenResponse.access_token}`);
       console.log(`Item ID: ${tokenResponse.item_id}`);
       console.log(`userId: ${userId}`);
+      // Find User by id and store credentials in db
       User.findByIdAndUpdate(userId, {
         $set: {
           accessToken: tokenResponse.access_token,
@@ -50,7 +48,8 @@ const getAccessToken = (router) => {
         console.log(msg + '\n' + err);
         res.json({
           error: msg
-        })
+        });
+        next();
       })
 
     })

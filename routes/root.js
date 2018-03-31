@@ -9,9 +9,17 @@
 const root = (router) => {
   // router.use(bodyParser.json());
   router.use((req, res, next) => {
-    res.json({ 
-      msg: 'Welcome to my humble app :)'
-    });
+    const msg = `
+    <pre>
+
+    ----- weekly budget tracker -----
+
+        Site under construction.
+        Please come back later.
+
+    </pre>
+  `;
+    res.send(msg);
   });
 }
 
