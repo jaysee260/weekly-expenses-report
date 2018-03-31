@@ -2,11 +2,12 @@
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = {
-    entry: './public/*',
+    entry: '',
     output: {
         filename: './dist/bundle.js',
     },
     watch: true,
+    mode: "development",
     plugins: [
         new BrowserSyncPlugin({
           // browse to http://localhost:3000/ during development,
