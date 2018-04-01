@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   phone: {
     type: String,
-    required: [true, 'A phone number is required to register.'],
+    required: true,
     unique: true // look into a graceful way of handling unique error
   },
   // For now only US numbers supported,
@@ -20,12 +20,9 @@ const UserSchema = new Schema({
     unique: true
     // look into some sort of regex validation
   },
-  password: {
-    type: String,
-    required: [true, 'A password is required to register.']
-    // look into this being a reference to a 
-    // collection of hashed passwords associated
-    // with user IDs
+  credentials: {
+    type: Schema.Types.ObjectId,
+    ref: 'Credentials'
   },
   bioInf: {
     firstName: {
@@ -52,14 +49,6 @@ const UserSchema = new Schema({
   hasAccessToken: {
     type: Boolean,
     default: false
-  },          
-  accessToken: {
-    type: String,
-    default: null
-  },
-  itemId: {
-    type: String,
-    default: null
   },
   joinedOn: {
     type: Date,
