@@ -3,51 +3,83 @@
 //////////////////////////////////////
 
 const User = require('../../db/schemas/User');
+const Credentials = require('../../db/schemas/Credentials');
 
 const register = (router) => {
+
   router.post('/', (req, res, next) => {
-    let newUser = req.body;
+
+    // Capture key values from registration form
+    let { phone, email, password } = req.body;
+    /*
+      HERE - PERFORM SOME SORT OF BACK END VALIDATION
+      AND RESPOND ACCORDINGLY OR PROCEED. AVOID EVEN
+      TRYING TO CREATE A NEW USER WITH POTENTIALLY
+      FAULTY DATA
+    */
+
+    // Create new User instance
+    let newUser = new User({ phone, email, password });
     console.log(newUser);
-    // if conditions pass, redirect to dashboard
-    // otherwise, redirect to join with alerts
-    // res.redirect('/join');
-    User.create(newUser)
-      .then(user => {
-        let msg = 'User created';
-        console.log(msg + '\n' + user);
-        res.json({ msg });
-        next();
-      })
-      .catch(err => {
-        let msg = 'Error creating user';
+    // Save new User into DB
+    newUser.save(function(err) {
+      // if error, handle
+      if (err) {
+        let msg = 'Error creating User';
         console.log(msg + '\n' + err);
         res.json({ msg });
         next();
+      }
+
+      // Capcture userId
+      let userId = newUser._id;
+      // Create credentials store for user
+      let credentials = new Credentials({ userId, password });
+      // Save credentials
+      credentials.save(function(err) {
+        // if error, handle
+        if (err) {
+          let msg = 'Error saving User password';
+          console.log(msg + '\n' + err);
+          res.json({ msg });
+          next()
+        }
+
+        // Save Credentials reference in User document
+        newUser.credentials = credentials;
+        // Save changes
+        newUser.save(function(err) {
+          // if error, handle
+          if (err) {
+            let msg = 'Error creating user credentials reference';
+            console.log(msg + '\n' + err);
+            res.json({ msg });
+            next()
+          }
+
+          // if success, redirect
+          res.redirect('/login');
+        });
       });
+
+    });
+
+
   });
+
 };
 
 module.exports = register;
 
 
+// Test populate method and join User doc with 
+// its respective Credentials reference
+// let userId = "5ac049246e92d355a8ae1fe1";
 
-// let newUser = new User(req.body);
-// User.register(newUser, function(err, user) {
-//   if (err) {
-//     let msg = 'Error creating user';
-//     console.log(msg + '\n' + err);
-//     res.json({ msg });
-//     next();
-//   }
-
-//   let msg = 'User created';
-//   console.log(msg + '\n' + user);
-//   res.json({ msg });
-//   next();
-
-// });
-
-// res.json({
-//   msg: 'user registration capabilites under construction'
-// });
-// next();
+// User.findById(userId)
+//   .populate('credentials')
+//   .exec(function(err, user) {
+//     if (err) throw err;
+//     console.log(user);
+//     res.json({ user });
+//   });
