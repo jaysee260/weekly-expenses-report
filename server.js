@@ -17,6 +17,10 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const keys = require('./config');
 
+// Authentication Packages
+const session = require('express-session');
+const passport = require('passport');
+
 // Colors for console messages
 const { y, m, g, r, b } = require('./console');
 
@@ -43,6 +47,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(expressValidator());
 app.use(cookieParser());
+app.use(session({
+  secret: 'merkmerk',
+  resave: false,
+  saveUninitialized: false
+  // cookie: { secure: true }
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use('/plaid', express.static('public'));
 app.use('/join', express.static('public'));
 app.use('/login', express.static('public'));
