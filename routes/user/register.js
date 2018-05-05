@@ -9,6 +9,12 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const { y, r } = require("../../console");
 
+/**
+ * @TODO:
+ * Check if username (phone or email) already exists
+ * before creating new user.
+ */
+
 const register = router => {
   router.post("/", (req, res, next) => {
     // req.checkBody('phone', 'Phone number field cannot be empty.').notEmpty();

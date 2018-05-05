@@ -9,7 +9,7 @@ const login = (router) => {
   router.post('/',
     passport.authenticate('local', { successRedirect:'/join', failureRedirect: '/login' }),
     (req, res, next) => {
-
+    console.log(req.user);
     // if auth successful, redirect to dashboard.
     // otherwise, redirect to login with alert
 
