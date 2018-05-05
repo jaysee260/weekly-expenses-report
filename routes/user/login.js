@@ -2,10 +2,14 @@
 /////   login POST route   /////
 ///////////////////////////////
 
+const passport = require('passport');
+
+
 const login = (router) => {
-  router.post('/', /* authenticationFunction, */ (req, res, next) => {
-    let returningUser = req.body;
-    console.log(returningUser);
+  router.post('/',
+    passport.authenticate('local', { successRedirect:'/join', failureRedirect: '/login' }),
+    (req, res, next) => {
+
     // if auth successful, redirect to dashboard.
     // otherwise, redirect to login with alert
 
@@ -18,9 +22,10 @@ const login = (router) => {
     // 3.2. With _id at hand, look in Credentials collection by userId
     // 3.2  Compare hashes (password). MAKE SURE TO HASH PASSWORD ON FRONT END;
     //      DO NOT SEND OVER PLAIN PASSWORD.
-    res.json({
-      msg: 'user authentication capabilites under construction'
-    });
+    // res.json({
+    //   msg: 'user authentication capabilites under construction'
+    // });
+    res.redirect('/');
     next();
   });
 };

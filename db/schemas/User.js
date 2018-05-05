@@ -63,16 +63,4 @@ const UserSchema = new Schema({
 
 const User = mongoose.model('User', UserSchema);
 
-// UserSchema.statics.register = function(user) {
-//   return new Promise(function(resolve, reject) {
-//     User.create(user)
-//       .then(doc => resolve(doc))
-//       .catch(err => reject(err))
-//   });
-// };
-
-// UserSchema.methods.register = function(user, cb) {
-//   return this.create(user, cb);
-// };
-
 module.exports = User;
