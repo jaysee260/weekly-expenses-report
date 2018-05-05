@@ -4,10 +4,10 @@
 /////  process requests for plaid services   /////
 /////////////////////////////////////////////////
 
-const bodyParser =  	    require('body-parser');
+const bodyParser      = require('body-parser');
 
-const register =     require('express').Router();
-const login =         require('express').Router();
+const register        = require('express').Router();
+const login           = require('express').Router();
 
 // register routes for user registration and authentication
 require('./user/register')(register);

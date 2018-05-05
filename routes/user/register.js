@@ -17,23 +17,25 @@ const { y, r } = require("../../console");
 
 const register = router => {
   router.post("/", (req, res, next) => {
-    // req.checkBody('phone', 'Phone number field cannot be empty.').notEmpty();
-    // req.checkBody('email', 'Email field cannot be empty.').notEmpty();
-    // req.checkBody('email', 'The email you entered in invalid, please try again.').isEmail();
-    // req.checkBody('password', 'Password field cannot be empty.').notEmpty();
 
-    // const errors = req.validationErrors();
-    // if (errors) {
-    //   console.log(r('! Validation Errors !') + '\n' + JSON.stringify(errors, null, 2));
-    //   res.json({
-    //     errorType: "VALIDATION",
-    //     errors
-    //   });
-    // }
+    // Validation
+    req.checkBody('phone', 'Phone number field cannot be empty.').notEmpty();
+    req.checkBody('email', 'Email field cannot be empty.').notEmpty();
+    req.checkBody('email', 'The email you entered in invalid, please try again.').isEmail();
+    req.checkBody('password', 'Password field cannot be empty.').notEmpty();
+
+    const errors = req.validationErrors();
+    if (errors) {
+      console.log(r('! Validation Errors !') + '\n' + JSON.stringify(errors, null, 2));
+      res.json({
+        errorType: "VALIDATION",
+        errors
+      });
+    }
 
     // Capture key values from registration form
     const { phone, email, password } = req.body;
-    console.log(phone, email, password);
+    // console.log(phone, email, password);
 
     bcrypt.hash(password, saltRounds, function(hashingError, hash) {
       // Create new User instance
@@ -88,7 +90,6 @@ const register = router => {
     });// end bcrypt
 
   });
-  //   bcrypt.hash(password, saltRounds, function(hashingError, hash) {
       
   
 };
